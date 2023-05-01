@@ -17,10 +17,10 @@ char SMSContact[18]; //кому отправляются уведомления 
 
 
 
-//цифровые выходы/выходы (прерывания только на 2 и 3 пине)
-const int GSMTXPin = 2; //GSM пин с которого мы получаем входящие сообщения на ардуину от GSM асинхронно по прерываниям (!!!прерывание - ОБЯЗАТЕЛЬНО!!!).
-const int SOSButtonPin = 3;  // кнопка энкодера
-const int GSMRXPin = 4; //GSM пин на который мы отправляем исходящие сообщения с ардуины (без прерывания)
+//цифровые входы/выходы (прерывания только на 2 и 3 пине)
+const int GSMTXPin = 2; // пин на который мы получаем входящие сообщения от GSM асинхронно по прерываниям (!!!прерывание - ОБЯЗАТЕЛЬНО!!!).
+const int SOSButtonPin = 3;  // кнопка SOS
+const int GSMRXPin = 4; //  пин c которого мы отправляем исходящие сообщения, с ардуины на GSM (без прерывания)
 const int GSMPowerPin = 5; // пин включения/выключения GSM, подать HIGH на 1,1 сек.
 const int GSMStatusPin = 6; // пин состояния, когда GSM запустился появляется напряжение
 const int GSMRSTPin = 7; // пин перезагрузки GSM модуля, подтянуть к земле для сброса
@@ -34,16 +34,16 @@ NeoSWSerial serialSIM800(GSMTXPin, GSMRXPin); // мы инициализиров
 //инициируем объект дебаунсера
 Bounce DebouncedSOSButton = Bounce();
 
-static void HandleGSMRXData( char c )
+static void HandleGSMRXData( char c ) // собираем сообщения от GSM в ячейку "c"
 {
-  // add it to the inputString:
-  if (c == '\n' || c == '\r') {
-    stringComplete = true;
-  } else {
-    inputString += c;
+  // add it to the inputString:       // проверяем сообщение, \n или \r означает конец сообщения
+  if (c == '\n' || c == '\r') {       // если "c" равен "\n" или "\r"
+    stringComplete = true;            // "stringComplete" назначается истинным
+  } else {                            // ещё
+    inputString += c;                 // ?
   }
 }
-void HandleIncomingSerialFromGSM() {
+void HandleIncomingSerialFromGSM() {  //посылаем законченое сообщение в компорт 
   // Вывод
   if (stringComplete) {
     if (inputString.length() != 0) {
