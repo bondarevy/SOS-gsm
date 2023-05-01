@@ -40,17 +40,17 @@ static void HandleGSMRXData( char c ) // собираем сообщения о�
   if (c == '\n' || c == '\r') {       // если "c" равен "\n" или "\r"
     stringComplete = true;            // "stringComplete" назначается истинным
   } else {                            // ещё
-    inputString += c;                 // ?
+    inputString += c;                 // записываем в inputString информацию из ячейки "с" путём сложения
   }
 }
-void HandleIncomingSerialFromGSM() {  //посылаем законченое сообщение в компорт 
-  // Вывод
-  if (stringComplete) {
-    if (inputString.length() != 0) {
-      Serial.println(inputString);
-      inputString = "";
+void HandleIncomingSerialFromGSM() {  // посылаем законченое сообщение в компорт 
+  // Вывод                              
+  if (stringComplete) {               //      
+    if (inputString.length() != 0) {  // если количество символов не равно нулю
+      Serial.println(inputString);    // послать в компорт сообщение находящиеся в "inputString"
+      inputString = "";               // стёрли сообщение в "inputString"
     }
-    stringComplete = false;
+    stringComplete = false;           // назначили "stringComlete" ложью
   }
 }
 
