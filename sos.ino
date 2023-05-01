@@ -27,7 +27,7 @@ const int GSMRSTPin = 7; // пин перезагрузки GSM модуля, п
 
 
 String inputString = "";   // буквенная переменная в которую будут собиратся сообщения по одному байту от GSM
-boolean stringComplete = false;  // проверяем дошло ли сообшение до конца
+boolean stringComplete = false;  // устанавливаем переменную "stringComplete" в ложь
 
 NeoSWSerial serialSIM800(GSMTXPin, GSMRXPin); // мы инициализировали библиотеку NeoSWSerial, исоздали объект серейного порта платы SIM800
 
@@ -55,7 +55,7 @@ void HandleIncomingSerialFromGSM() {  // посылаем законченое �
 }
 
 
-void power()
+void power()                          // команда "power" подаёт на "GSMPowerPin" логическую единицу на 1.1 секунду
 {
   digitalWrite(GSMPowerPin, HIGH);
   delay(1100);
@@ -65,8 +65,8 @@ void power()
 
 
 void AtRequest(String AtCommand = "", String AtResponse = "", int Retries = 5) {
-  if (AtCommand.length() > 0 and AtResponse.length() == 0) {
-    wdt_reset();
+  if (AtCommand.length() > 0 and AtResponse.length() == 0) {             // если длина строки запроса больше ноля и длина строки ответов ровна нулю, это означает что программа зависла
+    wdt_reset();                                                         // и по этому делаем сброс
     serialSIM800.println(AtCommand);
     AtCommand = "";
   } else if (AtCommand.length() > 0 and AtResponse.length() > 0) {
