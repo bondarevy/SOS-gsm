@@ -68,7 +68,6 @@ void AtRequest(String AtCommand = "", String AtResponse = "", int Retries = 5) {
   if (AtCommand.length() > 0 and AtResponse.length() == 0) {             // если длина строки запроса больше ноля и длина строки ответов ровна нулю, это означает что программа зависла
     wdt_reset();                                                         // и по этому делаем сброс
     serialSIM800.println(AtCommand);                                     // посылаем в GSM модуль АТ команду
-   Serial.println(AtComand);    //для тестирования
      AtCommand = "";                                                      // 
   } else if (AtCommand.length() > 0 and AtResponse.length() > 0) {
     bool Finished = false;
@@ -76,7 +75,6 @@ void AtRequest(String AtCommand = "", String AtResponse = "", int Retries = 5) {
       wdt_reset();
       Retries--;
       serialSIM800.println(AtCommand);
-       Serial.println(AtComand);      // для тестирования
       unsigned long CurrentTime = millis();
       while ( millis() < CurrentTime + 5000 and Finished != true) {
         wdt_reset();
