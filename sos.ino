@@ -121,7 +121,7 @@ void GSMInit() {
 //}
 
 void CallSOS() {                                              // вызов!!!!!!!
-  GSMInit();
+ // GSMInit();
   Serial.println("Call SOS...");
    serialSIM800.println("ATD89187958840"); 
  // AtRequest("ATD89187958840", "OK");              // так не заработало
