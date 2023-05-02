@@ -24,7 +24,7 @@ const int GSMRXPin = 4;        //  пин c которого мы отправл
 const int GSMPowerPin = 5;     // пин включения/выключения GSM, подать HIGH на 1,1 сек.
 const int GSMStatusPin = 6;    // пин состояния, когда GSM запустился появляется напряжение
 const int GSMRSTPin = 7;       // пин перезагрузки GSM модуля, подтянуть к земле для сброса
-const int GSMStatusCallPin = 13   // пин индикации вызова
+const int GSMStatusCallPin = 13;   // пин индикации вызова
 
 String inputString = "";   // буквенная переменная в которую будут собиратся сообщения по одному байту от GSM
 boolean stringComplete = false;  // устанавливаем переменную "stringComplete" в ложь
