@@ -26,7 +26,7 @@ const int GSMStatusCallPin = 13;   // пин индикации вызова
 
 String inputString = "";   // буквенная переменная в которую будут собиратся сообщения по одному байту от GSM
 
-String offString = "NO CARRIER" ;   // 
+//String offString = "NO CARRIER" ;   // 
 
 boolean stringComplete = false;  // устанавливаем переменную "stringComplete" в ложь
 
@@ -53,13 +53,11 @@ void HandleIncomingSerialFromGSM() {  // посылаем законченое �
       if (inputString == "NO CARRIER") { 
          //если текст равен NO CARRIER - выколючаем GSMStatusCallPin:
          digitalWrite(GSMStatusCallPin, LOW); 
-      } else if (inputString == "ЧТО ТО ДРУГОЕ") {
+      } //else if (inputString == "ЧТО ТО ДРУГОЕ") {
          //сделать что то другое (сюда можно добавить команду или функцию)
-      }
+     //}
     } 
-      if (inputString.equalsIgnoreCase(offString) {
-        digitalWrite(GSMStatusCallPin, LOW);  //  выключаем питание cветодиода и усилителя звука
-      }
+      
           
       //myString.equalsIgnoreCase(myString2) – возвращает true, если myString совпадает с myString2. Регистр букв неважен
 
@@ -67,7 +65,7 @@ void HandleIncomingSerialFromGSM() {  // посылаем законченое �
     }
     stringComplete = false;           // назначили "stringComlete" ложью
   }
-}
+
 
 
 
